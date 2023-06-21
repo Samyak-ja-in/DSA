@@ -79,6 +79,29 @@ void insertFirst(int value)
     head=temp;
 }
 
+void del(int position)
+{
+    using ::next;
+    int count;
+    count=1;
+    temp=head;
+    while((count+1)!=position)
+    {
+        temp=temp->link;
+        count++;
+    }
+    next=temp->link;
+    temp->link=next->link;
+    free(next);
+}
+
+void delFirst()
+{
+    temp=head;
+    head=head->link;
+    free(temp);
+}
+
 int main()
 {
     int n;
@@ -108,7 +131,7 @@ int main()
         case 3:
         {
             int value,position;
-            cout<<"\nEnter the value and position you want to insert other than 1 ";
+            cout<<"\nEnter the value and position you want to insert  ";
             cin>>value>>position;
             if(position!=1)
             insert(value,position);
@@ -117,12 +140,24 @@ int main()
             break;
         }
 
+        // case 4:
+        // {
+        //     int value;
+        //     cout<<"\nEnter value to be inserted at first ";
+        //     cin>>value;
+        //     insertFirst(value);
+        //     break;
+        // }
+
         case 4:
         {
-            int value;
-            cout<<"\nEnter value to be inserted at first ";
-            cin>>value;
-            insertFirst(value);
+            int position;
+            cout<<"\nEnter position from which you want to delete ";
+            cin>>position;
+            if(position==1)
+            delFirst();
+            else
+            del(position);
             break;
         }
         default:
